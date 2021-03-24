@@ -337,7 +337,7 @@ typedef void * lv_indev_drv_user_data_t;            /*Type of user data in the i
 /* Montserrat fonts with bpp = 4
  * https://fonts.google.com/specimen/Montserrat  */
 #define LV_FONT_MONTSERRAT_12    0
-#define LV_FONT_MONTSERRAT_14    1
+#define LV_FONT_MONTSERRAT_14    0
 #define LV_FONT_MONTSERRAT_16    1
 #define LV_FONT_MONTSERRAT_18    0
 #define LV_FONT_MONTSERRAT_20    0
