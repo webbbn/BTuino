@@ -1,0 +1,49 @@
+{
+  "build": {
+    "core": "stm32",
+    "cpu": "cortex-m3",
+    "extra_flags": "-DSTM32F207xx",
+    "f_cpu": "120000000L",
+    "mcu": "stm32f207vct6",
+    "product_line": "STM32F207xx",
+    "variant": "BIGTREE_F207VCT6"
+  },
+  "connectivity": [
+    "can",
+    "ethernet"
+  ],
+  "debug": {
+    "default_tools": [
+      "stlink"
+    ],
+    "jlink_device": "STM32F207VC",
+    "onboard_tools": [
+      "stlink"
+    ],
+    "openocd_target": "stm32f2x",
+    "svd_path": "STM32F20x.svd"
+  },
+  "frameworks": [
+    "arduino",
+    "cmsis",
+    "mbed",
+    "stm32cube",
+    "libopencm3",
+    "zephyr"
+  ],
+  "name": "BIGTREETECH TFT STM32F207VCT6",
+  "upload": {
+    "maximum_ram_size": 98304,
+    "maximum_size": 229376,
+    "protocol": "stlink",
+    "protocols": [
+      "jlink",
+      "cmsis-dap",
+      "stlink",
+      "blackmagic",
+      "mbed"
+    ]
+  },
+  "url": "https://www.bigtree-tech.com/products/bigtreetech-tft35-v3-0-display-two-working-modes.html",
+  "vendor": "BIGTREETECH"
+}

@@ -1,7 +1,6 @@
-# Arduino STM32DUINO support for BIGTREETECH TFT35_E3_V3.0 board
+# Running LVGL on the TFT35_E3_V3.0 board using PlatformIO and Arduino
 
-Board tested with STM32DUINO core library, version 1.9.0.
-Arduino IDE 1.8.12 and 1.8.13
+Minor adaptation of https://github.com/ns96/BTuino to add support for building with PlatformIO and including an example using the Arduino interface to LVGL.
 
 # Table of Contents
 
@@ -26,28 +25,18 @@ Arduino IDE 1.8.12 and 1.8.13
 
 # Installation
 
-1. Install Arduino core support for STM32 based boards.
-	https://github.com/stm32duino/wiki/wiki/Getting-Started
+1. Install PlatformIO as normal: https://platformio.org/install
 
-2. Go to the source files directory of the STM32 core.  
-Source files directory can be found here https://github.com/stm32duino/wiki/wiki/Where-are-sources#stm32-core-sources-files-location <br>
+2. Copy the board variant into your platformio directory stmduino framework directory:
 
-Examples:
-- windows 10 path - %AppData%\Local\Arduino15\packages\STM32\hardware\stm32\1.9.0\
-- Linux path - /home/\<USERNAME\>/.arduino15/packages/STM32/hardware/stm32/1.9.0/   
-- Mac path - /Users/\<USERNAME\>/Library/Arduino15/packages/STM32/hardware/stm32/1.9.0/
+``` shell
+cp -r BIGTREE_F207VCT6 ~/.platformio/packages/framework-arduinoststm32/variants
+```
+or the equivalent if you are running Windows.
 
-where "1.9.0" is version of core library.  
+3. Build the project as usual and flash.
 
-3. Copy file "boards.local.txt" to the STM32 core source files directory (see above).
-
-4. Copy board directory 'BIGTREE_F207VCT6' with files to the 'variants' subdirectory.
-
-5. Restart Arduino IDE. Go to Tools -> Board:... -> 'Boards manager' and select '3D printer boards'.
-Select Tools -> 'Board part number:' -> BIGTREETECH TFT35-E3 V3.0
-6. Check Tools -> Upload method, should be set to "STM32Cube programmer(SWD)"
-7. Download and install "STM32Cube programmer" from https://www.st.com/en/development-tools/stm32cubeprog.html
-Arduino IDE uses it to upload sketches to the board. (see the following instructions for MacOS: https://community.st.com/s/question/0D50X0000BmnqrB/how-to-run-stm32cubeprogrammer-on-macos-catalina-10151-19b88)
+The project is configured to use a blackmagic probe, but can easily be changed to whatever hardware you have.
 
 # Using board hardware
 
