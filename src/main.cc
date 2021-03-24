@@ -5,6 +5,8 @@
 #include <GxCTRL/GxCTRL_ILI9488/GxCTRL_ILI9488.h>
 #include <lv_conf.h>
 #include <lvgl.h>
+#include <malloc.h> // for mallinfo()
+#include <unistd.h> // for sbrk()
 
 // Create the TFT interface classes
 GxIO_Class io;
@@ -38,6 +40,30 @@ static void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t
 
   // tell lvgl that flushing is done 
   lv_disp_flush_ready(disp);
+}
+
+int freeHighMemory()
+{
+    char top;
+#ifdef __arm__
+    return &top - reinterpret_cast<char*>(sbrk(0));
+#elif defined(CORE_TEENSY) || (ARDUINO > 103 && ARDUINO != 151)
+    return &top - __brkval;
+#else  // __arm__
+    return __brkval ? &top - __brkval : &top - __malloc_heap_start;
+#endif // __arm__
+}
+
+size_t halGetMaxFreeBlock() {
+  return freeHighMemory();
+}
+
+size_t halGetFreeHeap(void) {
+  struct mallinfo chuncks = mallinfo();
+
+  // fordblks
+  //    This is the total size of memory occupied by free (not in use) chunks.
+  return chuncks.fordblks + freeHighMemory();
 }
 
 void setup() {
@@ -87,7 +113,7 @@ void loop(void) {
   lv_task_handler();
   delay(5);
   if (loop_counter++ > 200) {
-    LV_LOG_INFO("Loop");
+    LV_LOG_INFO("Free blocks: %d  Free heap: %d", halGetMaxFreeBlock(), halGetFreeHeap());
     loop_counter = 0;
   }
 }
